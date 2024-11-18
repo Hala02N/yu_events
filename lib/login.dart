@@ -24,8 +24,8 @@ class _LoginState extends State<Login> {
     return Scaffold(
       backgroundColor: Color(0xFFEDE2DA),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
         children: [
+          SizedBox(height: 30),
           Image.asset('assets/images/logo.png'),
           SizedBox(height: 30),
           Text(
