@@ -1,6 +1,6 @@
 name: yu_events
 description: "A new Flutter project."
-publish_to: 'none'
+publish_to: "none" # Prevents accidental publication to pub.dev
 
 version: 1.0.0+1
 
@@ -10,7 +10,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  google_maps_flutter: ^2.3.0
+  cloud_firestore: ^4.10.2
+  firebase_core: ^2.32.0
   url_launcher: ^6.1.7
+  geolocator: ^9.0.2
   cupertino_icons: ^1.0.8
 
 dev_dependencies:
@@ -24,3 +28,4 @@ flutter:
   # Add assets here
   assets:
     - assets/images/
+    - assets/Logo.png
