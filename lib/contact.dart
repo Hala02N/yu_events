@@ -1,21 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-void main() => runApp(MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: ContactPage(),
-    ));
-
 class ContactPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFDF3EB), // Light beige background
+      backgroundColor: const Color(0xFFFDF3EB), // Light beige background
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -27,7 +22,7 @@ class ContactPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Title
-            Center(
+            const Center(
               child: Text(
                 "Contact",
                 style: TextStyle(
@@ -51,7 +46,7 @@ class ContactPage extends StatelessWidget {
             const SizedBox(height: 30),
 
             // Support Number Card
-            ContactCard(
+            const ContactCard(
               icon: Icons.support_agent,
               title: "Support number",
               number: "+966547778823",
@@ -60,7 +55,7 @@ class ContactPage extends StatelessWidget {
             const SizedBox(height: 20),
 
             // Technical Assistance Card
-            ContactCard(
+            const ContactCard(
               icon: Icons.engineering,
               title: "Technical Assistance",
               number: "+966788893213",
@@ -106,9 +101,9 @@ class ContactCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       decoration: BoxDecoration(
-        color: Color(0xFFFF7E42), // Orange background color
+        color: const Color(0xFFFF7E42), // Orange background color
         borderRadius: BorderRadius.circular(20),
       ),
       child: Row(
@@ -118,7 +113,7 @@ class ContactCard extends StatelessWidget {
             backgroundColor: Colors.white,
             child: Icon(
               icon,
-              color: Color(0xFFFF7E42), // Match the card background
+              color: const Color(0xFFFF7E42), // Match the card background
             ),
           ),
           const SizedBox(width: 15),
@@ -130,7 +125,7 @@ class ContactCard extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
                     color: Colors.black,
@@ -139,7 +134,7 @@ class ContactCard extends StatelessWidget {
                 const SizedBox(height: 5),
                 Text(
                   number,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     color: Colors.black,
                   ),
@@ -150,7 +145,7 @@ class ContactCard extends StatelessWidget {
 
           // Call Icon
           IconButton(
-            icon: Icon(Icons.phone, color: Colors.blue),
+            icon: const Icon(Icons.phone, color: Colors.blue),
             onPressed: () => _makePhoneCall(number), // Call the number
           ),
         ],

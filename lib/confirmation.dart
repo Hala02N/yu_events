@@ -40,7 +40,7 @@ class _ConfirmationPageState extends State<ConfirmationPage> {
           children: [
             Center(
               child: Image.asset(
-                'assets/Logo.png', // Replace with your image path
+                'assets/images/Logo.png', // Replace with your image path
                 height: 100,
                 fit: BoxFit.contain,
               ),
@@ -56,7 +56,7 @@ class _ConfirmationPageState extends State<ConfirmationPage> {
             ),
             const SizedBox(height: 10),
             const Text(
-              'Your booking for the Samara Event on 15th November has been confirmed. Thank you for booking with us!',
+              'Your booking for the Event has been confirmed. Thank you for booking with us!',
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.black,
