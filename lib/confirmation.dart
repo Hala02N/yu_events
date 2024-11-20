@@ -25,12 +25,6 @@ class _ConfirmationPageState extends State<ConfirmationPage> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () {
-            Navigator.pop(context); // Navigate back to the previous page
-          },
-        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
