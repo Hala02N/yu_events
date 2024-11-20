@@ -3,10 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'forgotPassword.dart';
 import 'layout.dart';
 
-void main() => runApp(const MaterialApp(
-      home: Login(),
-    ));
-
 class Login extends StatefulWidget {
   const Login({super.key});
 
@@ -17,6 +13,7 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  bool _isPasswordVisible = false;
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   void loginUser() async {
@@ -44,18 +41,8 @@ class _LoginState extends State<Login> {
                 const Layout()), // Replace with your homepage widget
       );
     } on FirebaseAuthException catch (e) {
-      String message;
-
-      if (e.code == 'user-not-found') {
-        message = 'No user found with this email.';
-      } else if (e.code == 'wrong-password') {
-        message = 'Wrong password provided.';
-      } else {
-        message = 'An error occurred. Please try again.';
-      }
-
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(message)),
+        const SnackBar(content: Text('Login failed. Please try again.')),
       );
     }
   }
@@ -64,118 +51,131 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFEDE2DA),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const SizedBox(height: 30),
-          Image.asset('assets/images/logo.png'),
-          const SizedBox(height: 30),
-          const Text(
-            "Log In ",
-            style: TextStyle(
-              color: Color(0xFFF68939),
-              fontSize: 30,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(height: 5),
-          const Text(
-            "Log in to your account and rest",
-            style: TextStyle(
-              fontSize: 15,
-            ),
-          ),
-          const SizedBox(height: 30),
-          SizedBox(
-            width: 350,
-            child: TextField(
-              controller: emailController,
-              decoration: InputDecoration(
-                labelText: "Username",
-                labelStyle: const TextStyle(
-                  color: Colors.grey,
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30),
-                  borderSide: const BorderSide(
-                    color: Color(0xFFF68939),
-                    width: 2,
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30),
-                  borderSide: const BorderSide(
-                    color: Color(0xFFF68939),
-                    width: 2,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(height: 15),
-          SizedBox(
-            width: 350,
-            child: TextField(
-              controller: passwordController,
-              decoration: InputDecoration(
-                labelText: "Password",
-                labelStyle: const TextStyle(
-                  color: Colors.grey,
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30),
-                  borderSide: const BorderSide(
-                    color: Color(0xFFF68939),
-                    width: 2,
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30),
-                  borderSide: const BorderSide(
-                    color: Color(0xFFF68939),
-                    width: 2,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(height: 15),
-          ElevatedButton(
-            onPressed: loginUser,
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFFF68939),
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 150, vertical: 15),
-            ),
-            child: const Text(
-              "Log in",
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset('assets/images/logo.png'),
+            const SizedBox(height: 30),
+            const Text(
+              "Log In ",
               style: TextStyle(
+                color: Color(0xFFF68939),
+                fontSize: 30,
                 fontWeight: FontWeight.bold,
-                fontSize: 18,
-                color: Colors.black,
               ),
             ),
-          ),
-          const SizedBox(height: 5),
-          TextButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      ForgotPasswordScreen(), // Navigate to ForgotPassword page
-                ),
-              );
-            },
-            child: const Text(
-              "Forgot my password",
+            const SizedBox(height: 5),
+            const Text(
+              "Your one place for all YU events",
               style: TextStyle(
-                color: Colors.black,
+                fontSize: 15,
               ),
             ),
-          ),
-        ],
+            const SizedBox(height: 30),
+            SizedBox(
+              width: 350,
+              child: TextField(
+                controller: emailController,
+                decoration: InputDecoration(
+                  labelText: "Username",
+                  labelStyle: const TextStyle(
+                    color: Colors.grey,
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide: const BorderSide(
+                      color: Color(0xFFF68939),
+                      width: 2,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide: const BorderSide(
+                      color: Color(0xFFF68939),
+                      width: 2,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 15),
+            SizedBox(
+              width: 350,
+              child: TextField(
+                controller: passwordController,
+                obscureText: !_isPasswordVisible,
+                decoration: InputDecoration(
+                  labelText: "Password",
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _isPasswordVisible
+                          ? Icons.visibility
+                          : Icons.visibility_off,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _isPasswordVisible = !_isPasswordVisible;
+                      });
+                    },
+                  ),
+                  labelStyle: const TextStyle(
+                    color: Colors.grey,
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide: const BorderSide(
+                      color: Color(0xFFF68939),
+                      width: 2,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide: const BorderSide(
+                      color: Color(0xFFF68939),
+                      width: 2,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 15),
+            ElevatedButton(
+              onPressed: loginUser,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFFF68939),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 150, vertical: 15),
+              ),
+              child: const Text(
+                "Log in",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+            const SizedBox(height: 5),
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        ForgotPasswordScreen(), // Navigate to ForgotPassword page
+                  ),
+                );
+              },
+              child: const Text(
+                "Forgot my password",
+                style: TextStyle(
+                  color: Colors.black,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
