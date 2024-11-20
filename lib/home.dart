@@ -3,6 +3,8 @@ import 'dart:async';
 import 'confirmation.dart'; // Import your ConfirmationPage here
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -32,7 +34,7 @@ class _HomePageState extends State<HomePage> {
 
     // Set up auto-swiping
     Future.delayed(Duration.zero, () {
-      Timer.periodic(Duration(seconds: 3), (Timer timer) {
+      Timer.periodic(const Duration(seconds: 3), (Timer timer) {
         if (_currentPage < _images.length - 1) {
           _currentPage++;
         } else {
@@ -41,7 +43,7 @@ class _HomePageState extends State<HomePage> {
         if (_pageController.hasClients) {
           _pageController.animateToPage(
             _currentPage,
-            duration: Duration(milliseconds: 300),
+            duration: const Duration(milliseconds: 300),
             curve: Curves.easeInOut,
           );
         }
@@ -179,7 +181,8 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _buildExpandableEventCard({required String title, required Widget content}) {
+  Widget _buildExpandableEventCard(
+      {required String title, required Widget content}) {
     return Card(
       color: Colors.black,
       margin: const EdgeInsets.only(bottom: 16.0),
@@ -191,11 +194,14 @@ class _HomePageState extends State<HomePage> {
           ListTile(
             title: Text(
               title,
-              style: TextStyle(color: Colors.orange, fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                  color: Colors.orange, fontWeight: FontWeight.bold),
             ),
             trailing: IconButton(
               icon: Icon(
-                _expanded[title]! ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
+                _expanded[title]!
+                    ? Icons.keyboard_arrow_up
+                    : Icons.keyboard_arrow_down,
                 color: Colors.orange,
               ),
               onPressed: () {
@@ -207,7 +213,8 @@ class _HomePageState extends State<HomePage> {
           ),
           if (_expanded[title]!)
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
               child: content,
             ),
         ],
@@ -221,14 +228,16 @@ class _HomePageState extends State<HomePage> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => ConfirmationPage(), // Use ConfirmationPage from confirmation.dart
+            builder: (context) =>
+                ConfirmationPage(), // Use ConfirmationPage from confirmation.dart
           ),
         );
       },
       child: Chip(
         label: Text(
           label,
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          style:
+              const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
         backgroundColor: Colors.orange,
       ),

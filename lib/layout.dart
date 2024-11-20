@@ -4,15 +4,17 @@ import 'contact.dart'; // Replace with the actual path
 import 'profile.dart'; // Replace with the actual path
 
 class Layout extends StatefulWidget {
+  const Layout({super.key});
+
   @override
   _LayoutState createState() => _LayoutState();
 }
 
 class _LayoutState extends State<Layout> {
-  int _currentIndex = 0;
+  int _currentIndex = 1;
   final List<Widget> _pages = [
     ContactPage(),
-     HomePage(),
+    HomePage(),
     ProfilePage(),
   ];
 
@@ -28,7 +30,6 @@ class _LayoutState extends State<Layout> {
           });
         },
         items: const [
-          
           BottomNavigationBarItem(
             icon: Icon(Icons.phone),
             label: "Contact",

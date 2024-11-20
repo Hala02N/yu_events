@@ -5,6 +5,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -15,6 +17,8 @@ class MyApp extends StatelessWidget {
 }
 
 class ProfilePage extends StatefulWidget {
+  const ProfilePage({super.key});
+
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
@@ -26,12 +30,14 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFDF3EB), // Background color as per design
+      backgroundColor:
+          const Color(0xFFFDF3EB), // Background color as per design
       appBar: AppBar(
         backgroundColor: Colors.transparent, // Transparent AppBar
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black), // Black back arrow
+          icon: const Icon(Icons.arrow_back,
+              color: Colors.black), // Black back arrow
           onPressed: () {
             Navigator.pop(context);
           },
@@ -43,7 +49,7 @@ class _ProfilePageState extends State<ProfilePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Profile Header
-            Center(
+            const Center(
               child: Text(
                 "Profile",
                 style: TextStyle(
@@ -57,12 +63,12 @@ class _ProfilePageState extends State<ProfilePage> {
 
             // Profile Information Section
             Container(
-              padding: EdgeInsets.all(15),
+              padding: const EdgeInsets.all(15),
               decoration: BoxDecoration(
-                color: Color(0xFFFF7E42), // Orange container background
+                color: const Color(0xFFFF7E42), // Orange container background
                 borderRadius: BorderRadius.circular(20), // Rounded corners
               ),
-              child: Row(
+              child: const Row(
                 children: [
                   CircleAvatar(
                     backgroundColor:
@@ -71,7 +77,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     child: Icon(Icons.person,
                         size: 40, color: Color(0xFFFF7E42)), // Orange icon
                   ),
-                  const SizedBox(width: 15),
+                  SizedBox(width: 15),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -83,7 +89,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           color: Colors.black, // Black text
                         ),
                       ),
-                      const SizedBox(height: 5),
+                      SizedBox(height: 5),
                       Text(
                         "Email: Dinah@gmail.com",
                         style: TextStyle(
@@ -100,9 +106,9 @@ class _ProfilePageState extends State<ProfilePage> {
 
             // Change Password Section
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
               decoration: BoxDecoration(
-                color: Color(0xFFFF7E42), // Orange container background
+                color: const Color(0xFFFF7E42), // Orange container background
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Column(
@@ -115,9 +121,10 @@ class _ProfilePageState extends State<ProfilePage> {
                     },
                     child: Row(
                       children: [
-                        Icon(Icons.lock, color: Colors.black), // Lock icon
+                        const Icon(Icons.lock,
+                            color: Colors.black), // Lock icon
                         const SizedBox(width: 15),
-                        Expanded(
+                        const Expanded(
                           child: Text(
                             "Change Password",
                             style: TextStyle(
@@ -178,7 +185,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 borderRadius: BorderRadius.circular(30),
                               ),
                             ),
-                            child: Text("Confirm"),
+                            child: const Text("Confirm"),
                           ),
                         ],
                       ),
@@ -190,9 +197,9 @@ class _ProfilePageState extends State<ProfilePage> {
 
             // Logout Section
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
               decoration: BoxDecoration(
-                color: Color(0xFFFF7E42), // Orange container background
+                color: const Color(0xFFFF7E42), // Orange container background
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Column(
@@ -205,9 +212,10 @@ class _ProfilePageState extends State<ProfilePage> {
                     },
                     child: Row(
                       children: [
-                        Icon(Icons.logout, color: Colors.black), // Logout icon
+                        const Icon(Icons.logout,
+                            color: Colors.black), // Logout icon
                         const SizedBox(width: 15),
-                        Expanded(
+                        const Expanded(
                           child: Text(
                             "Logout",
                             style: TextStyle(
@@ -228,7 +236,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       padding: const EdgeInsets.only(top: 15.0),
                       child: Column(
                         children: [
-                          Text(
+                          const Text(
                             "Are you sure you want to log out?",
                             style: TextStyle(fontSize: 16),
                           ),
@@ -243,7 +251,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 borderRadius: BorderRadius.circular(30),
                               ),
                             ),
-                            child: Text("Confirm"),
+                            child: const Text("Confirm"),
                           ),
                         ],
                       ),

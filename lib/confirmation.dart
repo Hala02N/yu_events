@@ -6,6 +6,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -16,6 +18,8 @@ class MyApp extends StatelessWidget {
 }
 
 class ConfirmationPage extends StatefulWidget {
+  const ConfirmationPage({super.key});
+
   @override
   State<ConfirmationPage> createState() => _ConfirmationPageState();
 }
@@ -23,7 +27,8 @@ class ConfirmationPage extends StatefulWidget {
 class _ConfirmationPageState extends State<ConfirmationPage> {
   late GoogleMapController mapController;
 
-  final LatLng _center = const LatLng(24.86380396932249, 46.5937082695471); // Coordinates for Riyadh
+  final LatLng _center = const LatLng(
+      24.86380396932249, 46.5937082695471); // Coordinates for Riyadh
 
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
@@ -88,7 +93,7 @@ class _ConfirmationPageState extends State<ConfirmationPage> {
                     ),
                     markers: {
                       Marker(
-                        markerId: MarkerId('eventLocation'),
+                        markerId: const MarkerId('eventLocation'),
                         position: _center,
                       ),
                     },
