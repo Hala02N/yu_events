@@ -59,116 +59,122 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFFBE9E7),
-      body: Column(
-        children: [
-          // Image Carousel
-          SizedBox(
-            height: 200,
-            child: PageView.builder(
-              controller: _pageController,
-              onPageChanged: (int index) {
-                setState(() {
-                  _currentPage = index;
-                });
-              },
-              itemCount: _images.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.asset(
-                      _images[index],
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
-          const SizedBox(height: 20),
-
-          // Dots Indicator
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: List.generate(
-              _images.length,
-              (index) => Container(
-                margin: const EdgeInsets.symmetric(horizontal: 4),
-                width: 8,
-                height: 8,
-                decoration: BoxDecoration(
-                  color: _currentPage == index ? Colors.grey[700] : Colors.grey[400],
-                  shape: BoxShape.circle,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              // Image Carousel
+              SizedBox(
+                height: 200,
+                child: PageView.builder(
+                  controller: _pageController,
+                  onPageChanged: (int index) {
+                    setState(() {
+                      _currentPage = index;
+                    });
+                  },
+                  itemCount: _images.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.asset(
+                          _images[index],
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ),
-            ),
-          ),
-          const SizedBox(height: 24),
+              const SizedBox(height: 20),
 
-          // Book Now Section
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  'Book Now',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
+              // Dots Indicator
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(
+                  _images.length,
+                  (index) => Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 4),
+                    width: 8,
+                    height: 8,
+                    decoration: BoxDecoration(
+                      color: _currentPage == index
+                          ? Colors.grey[700]
+                          : Colors.grey[400],
+                      shape: BoxShape.circle,
+                    ),
                   ),
                 ),
-                const SizedBox(height: 16),
-                _buildExpandableEventCard(
-                  title: 'Clubs Day',
-                  content: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      _buildDateChip('1 Jun'),
-                      _buildDateChip('2 Jun'),
-                      _buildDateChip('3 Jun'),
-                      _buildDateChip('4 Jun'),
-                    ],
-                  ),
+              ),
+              const SizedBox(height: 24),
+
+              // Book Now Section
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Book Now',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    _buildExpandableEventCard(
+                      title: 'Clubs Day',
+                      content: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          _buildDateChip('1 Jun'),
+                          _buildDateChip('2 Jun'),
+                          _buildDateChip('3 Jun'),
+                          _buildDateChip('4 Jun'),
+                        ],
+                      ),
+                    ),
+                    _buildExpandableEventCard(
+                      title: 'Career Center',
+                      content: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          _buildDateChip('5 Aug'),
+                          _buildDateChip('6 Aug'),
+                          _buildDateChip('7 Aug'),
+                        ],
+                      ),
+                    ),
+                    _buildExpandableEventCard(
+                      title: 'Art Gallery',
+                      content: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          _buildDateChip('7 Sep'),
+                          _buildDateChip('8 Sep'),
+                        ],
+                      ),
+                    ),
+                    _buildExpandableEventCard(
+                      title: 'SAMRA EVENT',
+                      content: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          _buildDateChip('9 Dec'),
+                          _buildDateChip('10 Dec'),
+                          _buildDateChip('11 Dec'),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-                _buildExpandableEventCard(
-                  title: 'Career Center',
-                  content: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      _buildDateChip('5 Aug'),
-                      _buildDateChip('6 Aug'),
-                      _buildDateChip('7 Aug'),
-                    ],
-                  ),
-                ),
-                _buildExpandableEventCard(
-                  title: 'Art Gallery',
-                  content: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      _buildDateChip('7 Sep'),
-                      _buildDateChip('8 Sep'),
-                    ],
-                  ),
-                ),
-                _buildExpandableEventCard(
-                  title: 'SAMRA EVENT',
-                  content: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      _buildDateChip('9 Dec'),
-                      _buildDateChip('10 Dec'),
-                      _buildDateChip('11 Dec'),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
