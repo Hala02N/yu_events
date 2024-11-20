@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
     'Clubs Day': false,
     'Career Center': false,
     'Art Gallery': false,
-    'SAMRA EVENT': false,
+    'Samra Event': false,
   };
 
   @override
@@ -161,7 +161,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     _buildExpandableEventCard(
-                      title: 'SAMRA EVENT',
+                      title: 'Samra Event',
                       content: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [

@@ -11,68 +11,62 @@ class ContactPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Title
-            const Center(
-              child: Text(
-                "Contact",
-                style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFFFF7E42), // Orange shade
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Title
+              const Center(
+                child: Text(
+                  "Contact",
+                  style: TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFFFF7E42), // Orange shade
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(height: 10),
-            Center(
-              child: Text(
-                "If you need help please contact these numbers",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.grey[800],
+              const SizedBox(height: 10),
+              Center(
+                child: Text(
+                  "If you need help please contact these numbers",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.grey[800],
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(height: 30),
+              const SizedBox(height: 30),
 
-            // Support Number Card
-            const ContactCard(
-              icon: Icons.support_agent,
-              title: "Support number",
-              number: "+966547778823",
-            ),
-
-            const SizedBox(height: 20),
-
-            // Technical Assistance Card
-            const ContactCard(
-              icon: Icons.engineering,
-              title: "Technical Assistance",
-              number: "+966788893213",
-            ),
-
-            const Spacer(),
-
-            // Illustration Image
-            Center(
-              child: Image.asset(
-                'assets/images/contact.png', // Replace with your image path
-                height: 200,
+              // Support Number Card
+              const ContactCard(
+                icon: Icons.support_agent,
+                title: "Support number",
+                number: "+966547778823",
               ),
-            ),
-          ],
+
+              const SizedBox(height: 20),
+
+              // Technical Assistance Card
+              const ContactCard(
+                icon: Icons.engineering,
+                title: "Technical Assistance",
+                number: "+966788893213",
+              ),
+              const SizedBox(height: 20),
+              // Illustration Image
+              Center(
+                child: Image.asset(
+                  'assets/images/contact.png', // Replace with your image path
+                  height: 200,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -148,7 +142,7 @@ class ContactCard extends StatelessWidget {
 
           // Call Icon
           IconButton(
-            icon: const Icon(Icons.phone, color: Colors.blue),
+            icon: const Icon(Icons.phone, color: Colors.white),
             onPressed: () => _makePhoneCall(number), // Call the number
           ),
         ],
