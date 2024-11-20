@@ -5,6 +5,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -15,6 +17,8 @@ class MyApp extends StatelessWidget {
 }
 
 class ForgotPasswordScreen extends StatefulWidget {
+  const ForgotPasswordScreen({super.key});
+
   @override
   _ForgotPasswordState createState() => _ForgotPasswordState();
 }
@@ -33,12 +37,12 @@ class _ForgotPasswordState extends State<ForgotPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFDF3EB), // Light beige background
+      backgroundColor: const Color(0xFFFDF3EB), // Light beige background
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -59,7 +63,7 @@ class _ForgotPasswordState extends State<ForgotPasswordScreen> {
             const SizedBox(height: 150),
 
             // Forgot Password Text
-            Center(
+            const Center(
               child: Text(
                 'Forgot Password?',
                 style: TextStyle(
@@ -76,19 +80,19 @@ class _ForgotPasswordState extends State<ForgotPasswordScreen> {
               controller: emailController, // Use the correct controller here
               decoration: InputDecoration(
                 hintText: 'Email',
-                hintStyle: TextStyle(
+                hintStyle: const TextStyle(
                   color: Colors.grey,
                 ),
                 filled: true,
                 fillColor: Colors.white,
                 enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
+                  borderSide: const BorderSide(
                     color: Color(0xFFFF7E42),
                   ),
                   borderRadius: BorderRadius.circular(30), // Rounder corners
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
+                  borderSide: const BorderSide(
                     color: Color(0xFFFF7E42),
                     width: 2,
                   ),
@@ -110,17 +114,18 @@ class _ForgotPasswordState extends State<ForgotPasswordScreen> {
                     print('Email field is empty');
                   }
                 },
-                icon: Icon(Icons.email, color: Colors.black),
-                label: Text(
+                icon: const Icon(Icons.email, color: Colors.black),
+                label: const Text(
                   'Send',
                   style: TextStyle(color: Colors.black),
                 ),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFFFF7E42), // Orange button color
+                  backgroundColor:
+                      const Color(0xFFFF7E42), // Orange button color
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  padding: EdgeInsets.symmetric(
+                  padding: const EdgeInsets.symmetric(
                     horizontal: 40,
                     vertical: 15,
                   ),

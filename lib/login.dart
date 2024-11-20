@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 
 import 'forgotPassword.dart';
 
-void main() => runApp(MaterialApp(
+void main() => runApp(const MaterialApp(
       home: Login(),
     ));
 
@@ -22,47 +22,47 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFEDE2DA),
+      backgroundColor: const Color(0xFFEDE2DA),
       body: Column(
         children: [
-          SizedBox(height: 30),
+          const SizedBox(height: 30),
           Image.asset('assets/images/logo.png'),
-          SizedBox(height: 30),
-          Text(
+          const SizedBox(height: 30),
+          const Text(
             "Log In ",
             style: TextStyle(
-              color: const Color(0xFFF68939),
+              color: Color(0xFFF68939),
               fontSize: 30,
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(height: 5),
-          Text(
+          const SizedBox(height: 5),
+          const Text(
             "Log in to your account and rest",
             style: TextStyle(
               fontSize: 15,
             ),
           ),
-          SizedBox(height: 30),
-          Container(
+          const SizedBox(height: 30),
+          SizedBox(
             width: 350,
             child: TextField(
               controller: usrenamecontrolar,
               decoration: InputDecoration(
                 labelText: "Username",
-                labelStyle: TextStyle(
+                labelStyle: const TextStyle(
                   color: Colors.grey,
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
-                  borderSide: BorderSide(
+                  borderSide: const BorderSide(
                     color: Color(0xFFF68939),
                     width: 2,
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
-                  borderSide: BorderSide(
+                  borderSide: const BorderSide(
                     color: Color(0xFFF68939),
                     width: 2,
                   ),
@@ -70,26 +70,26 @@ class _LoginState extends State<Login> {
               ),
             ),
           ),
-          SizedBox(height: 15),
-          Container(
+          const SizedBox(height: 15),
+          SizedBox(
             width: 350,
             child: TextField(
               controller: passwordcontrolar,
               decoration: InputDecoration(
                 labelText: "Password",
-                labelStyle: TextStyle(
+                labelStyle: const TextStyle(
                   color: Colors.grey,
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
-                  borderSide: BorderSide(
+                  borderSide: const BorderSide(
                     color: Color(0xFFF68939),
                     width: 2,
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
-                  borderSide: BorderSide(
+                  borderSide: const BorderSide(
                     color: Color(0xFFF68939),
                     width: 2,
                   ),
@@ -97,14 +97,15 @@ class _LoginState extends State<Login> {
               ),
             ),
           ),
-          SizedBox(height: 15),
+          const SizedBox(height: 15),
           ElevatedButton(
             onPressed: () {},
             style: ElevatedButton.styleFrom(
-              backgroundColor: Color(0xFFF68939),
-              padding: EdgeInsets.symmetric(horizontal: 150, vertical: 15),
+              backgroundColor: const Color(0xFFF68939),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 150, vertical: 15),
             ),
-            child: Text(
+            child: const Text(
               "Log in",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
@@ -113,7 +114,7 @@ class _LoginState extends State<Login> {
               ),
             ),
           ),
-          SizedBox(height: 5),
+          const SizedBox(height: 5),
           TextButton(
             onPressed: () {
               Navigator.push(
@@ -124,7 +125,7 @@ class _LoginState extends State<Login> {
                 ),
               );
             },
-            child: Text(
+            child: const Text(
               "Forgot my password",
               style: TextStyle(
                 color: Colors.black,

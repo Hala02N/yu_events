@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ContactPage extends StatelessWidget {
+  const ContactPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,6 +85,7 @@ class ContactCard extends StatelessWidget {
   final String number;
 
   const ContactCard({
+    super.key,
     required this.icon,
     required this.title,
     required this.number,
