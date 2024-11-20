@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/services.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'forgotPassword.dart';
+import 'layout.dart';
 
 void main() => runApp(const MaterialApp(
       home: Login(),
@@ -16,14 +15,58 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  final usrenamecontrolar = TextEditingController();
-  final passwordcontrolar = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  void loginUser() async {
+    String email = emailController.text.trim();
+    String password = passwordController.text.trim();
+
+    if (email.isEmpty || password.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please fill in all fields')),
+      );
+      return;
+    }
+
+    try {
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      // Navigate to Home Page
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                const Layout()), // Replace with your homepage widget
+      );
+    } on FirebaseAuthException catch (e) {
+      String message;
+
+      if (e.code == 'user-not-found') {
+        message = 'No user found with this email.';
+      } else if (e.code == 'wrong-password') {
+        message = 'Wrong password provided.';
+      } else {
+        message = 'An error occurred. Please try again.';
+      }
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(message)),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFEDE2DA),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const SizedBox(height: 30),
           Image.asset('assets/images/logo.png'),
@@ -47,7 +90,7 @@ class _LoginState extends State<Login> {
           SizedBox(
             width: 350,
             child: TextField(
-              controller: usrenamecontrolar,
+              controller: emailController,
               decoration: InputDecoration(
                 labelText: "Username",
                 labelStyle: const TextStyle(
@@ -74,7 +117,7 @@ class _LoginState extends State<Login> {
           SizedBox(
             width: 350,
             child: TextField(
-              controller: passwordcontrolar,
+              controller: passwordController,
               decoration: InputDecoration(
                 labelText: "Password",
                 labelStyle: const TextStyle(
@@ -99,7 +142,7 @@ class _LoginState extends State<Login> {
           ),
           const SizedBox(height: 15),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: loginUser,
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFFF68939),
               padding:
