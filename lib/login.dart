@@ -78,7 +78,7 @@ class _LoginState extends State<Login> {
               child: TextField(
                 controller: emailController,
                 decoration: InputDecoration(
-                  labelText: "Username",
+                  labelText: "Email",
                   labelStyle: const TextStyle(
                     color: Colors.grey,
                   ),
