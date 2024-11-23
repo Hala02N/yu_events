@@ -16,14 +16,111 @@ class _ProfilePageState extends State<ProfilePage> {
 
   // Get the current user id
   final user = FirebaseAuth.instance.currentUser;
-  // Retrieve user information from firestore
+  // Retrieve user information from Firestore
   late Future<DocumentSnapshot> userDoc;
+
+  // Controllers for password fields
+  final TextEditingController currentPasswordController =
+      TextEditingController();
+  final TextEditingController newPasswordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
+
+  // Visibility toggles
+  bool isCurrentPasswordVisible = false;
+  bool isNewPasswordVisible = false;
+  bool isConfirmPasswordVisible = false;
 
   @override
   void initState() {
     super.initState();
     userDoc =
         FirebaseFirestore.instance.collection('users').doc(user!.uid).get();
+  }
+
+  @override
+  void dispose() {
+    // Dispose controllers to free resources
+    currentPasswordController.dispose();
+    newPasswordController.dispose();
+    confirmPasswordController.dispose();
+    super.dispose();
+  }
+
+  // Function to handle password change
+  Future<void> changePassword() async {
+    final currentPassword = currentPasswordController.text.trim();
+    final newPassword = newPasswordController.text.trim();
+    final confirmPassword = confirmPasswordController.text.trim();
+
+    if (currentPassword.isEmpty ||
+        newPassword.isEmpty ||
+        confirmPassword.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("All fields are required."),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+
+    if (newPassword != confirmPassword) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("New password and confirmation do not match."),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+
+    try {
+      // Reauthenticate the user
+      final credential = EmailAuthProvider.credential(
+        email: user!.email!,
+        password: currentPassword,
+      );
+
+      await user!.reauthenticateWithCredential(credential);
+
+      // Update the password
+      await user!.updatePassword(newPassword);
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Password updated successfully!"),
+          backgroundColor: Colors.green,
+        ),
+      );
+
+      // Clear the fields
+      currentPasswordController.clear();
+      newPasswordController.clear();
+      confirmPasswordController.clear();
+    } on FirebaseAuthException catch (e) {
+      String errorMessage;
+
+      if (e.code == 'wrong-password') {
+        errorMessage = "The current password is incorrect.";
+      } else {
+        errorMessage = "An error occurred. Please try again.";
+      }
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(errorMessage),
+          backgroundColor: Colors.red,
+        ),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("An unexpected error occurred."),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
   }
 
   @override
@@ -99,7 +196,6 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                             const SizedBox(height: 5),
                             Text(
-                              // get the user email from firebase auth user
                               "Email: ${user!.email!}",
                               style: const TextStyle(
                                 fontSize: 14,
@@ -158,39 +254,79 @@ class _ProfilePageState extends State<ProfilePage> {
                         child: Column(
                           children: [
                             TextField(
+                              controller: currentPasswordController,
+                              obscureText: !isCurrentPasswordVisible,
                               decoration: InputDecoration(
                                 labelText: "Current Password",
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(30),
                                 ),
+                                suffixIcon: IconButton(
+                                  icon: Icon(
+                                    isCurrentPasswordVisible
+                                        ? Icons.visibility
+                                        : Icons.visibility_off,
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      isCurrentPasswordVisible =
+                                          !isCurrentPasswordVisible;
+                                    });
+                                  },
+                                ),
                               ),
-                              obscureText: true,
                             ),
                             const SizedBox(height: 10),
                             TextField(
+                              controller: newPasswordController,
+                              obscureText: !isNewPasswordVisible,
                               decoration: InputDecoration(
                                 labelText: "New Password",
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(30),
                                 ),
+                                suffixIcon: IconButton(
+                                  icon: Icon(
+                                    isNewPasswordVisible
+                                        ? Icons.visibility
+                                        : Icons.visibility_off,
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      isNewPasswordVisible =
+                                          !isNewPasswordVisible;
+                                    });
+                                  },
+                                ),
                               ),
-                              obscureText: true,
                             ),
                             const SizedBox(height: 10),
                             TextField(
+                              controller: confirmPasswordController,
+                              obscureText: !isConfirmPasswordVisible,
                               decoration: InputDecoration(
                                 labelText: "Confirm Password",
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(30),
                                 ),
+                                suffixIcon: IconButton(
+                                  icon: Icon(
+                                    isConfirmPasswordVisible
+                                        ? Icons.visibility
+                                        : Icons.visibility_off,
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      isConfirmPasswordVisible =
+                                          !isConfirmPasswordVisible;
+                                    });
+                                  },
+                                ),
                               ),
-                              obscureText: true,
                             ),
                             const SizedBox(height: 10),
                             ElevatedButton(
-                              onPressed: () {
-                                // Handle change password logic
-                              },
+                              onPressed: changePassword,
                               style: ElevatedButton.styleFrom(
                                 backgroundColor:
                                     Colors.red, // Red confirm button
@@ -258,14 +394,11 @@ class _ProfilePageState extends State<ProfilePage> {
                             const SizedBox(height: 10),
                             ElevatedButton(
                               onPressed: () {
-                                // Sign the user out
                                 FirebaseAuth.instance.signOut();
-                                // Navigate to the login screen
                                 Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          const Login()), // Replace with your homepage widget
+                                      builder: (context) => const Login()),
                                 );
                               },
                               style: ElevatedButton.styleFrom(
